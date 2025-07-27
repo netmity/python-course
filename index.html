@@ -5,30 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интерактивный курс Python - 7 дней до мастерства</title>
     
-    <!-- React и Babel из CDN -->
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.4/babel.min.js"></script>
-    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel для JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <style>
         body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
         }
+        
+        /* Иконки как CSS-классы */
+        .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .icon-play::before { content: "▶️"; }
+        .icon-check::before { content: "✅"; }
+        .icon-lock::before { content: "🔒"; }
+        .icon-code::before { content: "💻"; }
+        .icon-book::before { content: "📖"; }
+        .icon-target::before { content: "🎯"; }
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root">
+        <div style="padding: 2rem; text-align: center;">
+            <h1>Загрузка курса Python...</h1>
+            <p>Если эта страница не исчезнет через несколько секунд, проверьте консоль браузера (F12)</p>
+        </div>
+    </div>
 
     <script type="text/babel">
         const { useState, useEffect } = React;
-        const { Play, Check, Lock, Code, BookOpen, Target } = lucide;
+
+        // Простые иконки-компоненты
+        const PlayIcon = () => <span className="icon icon-play"></span>;
+        const CheckIcon = () => <span className="icon icon-check"></span>;
+        const LockIcon = () => <span className="icon icon-lock"></span>;
+        const CodeIcon = () => <span className="icon icon-code"></span>;
+        const BookIcon = () => <span className="icon icon-book"></span>;
+        const TargetIcon = () => <span className="icon icon-target"></span>;
 
         const PythonCourseApp = () => {
           const [currentLesson, setCurrentLesson] = useState(1);
@@ -48,22 +74,20 @@
                 {
                   title: "Знакомство с Python",
                   type: "theory",
-                  content: `
-# Добро пожаловать в мир Python! 🐍
+                  content: `# Добро пожаловать в мир Python! 🐍
 
 Python - это высокоуровневый язык программирования, который славится своей простотой и читаемостью. Он был создан Гвидо ван Россумом в 1991 году.
 
 ## Почему Python популярен?
-- **Простой синтаксис** - код читается почти как обычный английский
-- **Универсальность** - веб-разработка, анализ данных, ИИ, автоматизация
-- **Огромное сообщество** - множество библиотек и фреймворков
-- **Кроссплатформенность** - работает на Windows, Linux, macOS
+- Простой синтаксис - код читается почти как обычный английский
+- Универсальность - веб-разработка, анализ данных, ИИ, автоматизация
+- Огромное сообщество - множество библиотек и фреймворков
+- Кроссплатформенность - работает на Windows, Linux, macOS
 
 ## Философия Python (Дзен Python)
-*"Красивое лучше, чем уродливое"*
-*"Простое лучше, чем сложное"*
-*"Читаемость имеет значение"*
-                  `
+"Красивое лучше, чем уродливое"
+"Простое лучше, чем сложное"
+"Читаемость имеет значение"`
                 },
                 {
                   title: "Первая программа",
@@ -79,14 +103,13 @@ print("Меня зовут Python")
                 {
                   title: "Целые числа (int)",
                   type: "theory",
-                  content: `
-# Целые числа (int)
+                  content: `# Целые числа (int)
 
-В Python целые числа представляются типом **int**. Они могут быть положительными, отрицательными или нулем.
+В Python целые числа представляются типом int. Они могут быть положительными, отрицательными или нулем.
 
 ## Особенности:
-- **Неограниченная точность** - можете работать с очень большими числами
-- **Различные системы счисления**:
+- Неограниченная точность - можете работать с очень большими числами
+- Различные системы счисления:
   - Десятичная: 42
   - Двоичная: 0b101010 (равно 42)
   - Восьмеричная: 0o52 (равно 42)  
@@ -99,8 +122,7 @@ print("Меня зовут Python")
 - Деление: / (результат float)
 - Целочисленное деление: //
 - Остаток от деления: %
-- Возведение в степень: **
-                  `
+- Возведение в степень: **`
                 },
                 {
                   title: "Работа с целыми числами",
@@ -110,14 +132,14 @@ print("Меня зовут Python")
 a = 15
 b = 4
 
-print(f"a = {a}, b = {b}")
-print(f"Сложение: {a} + {b} = {a + b}")
-print(f"Вычитание: {a} - {b} = {a - b}")
-print(f"Умножение: {a} * {b} = {a * b}")
-print(f"Деление: {a} / {b} = {a / b}")
-print(f"Целочисленное деление: {a} // {b} = {a // b}")
-print(f"Остаток: {a} % {b} = {a % b}")
-print(f"Возведение в степень: {a} ** {b} = {a ** b}")
+print("a =", a, ", b =", b)
+print("Сложение:", a, "+", b, "=", a + b)
+print("Вычитание:", a, "-", b, "=", a - b)
+print("Умножение:", a, "*", b, "=", a * b)
+print("Деление:", a, "/", b, "=", a / b)
+print("Целочисленное деление:", a, "//", b, "=", a // b)
+print("Остаток:", a, "%", b, "=", a % b)
+print("Возведение в степень:", a, "**", b, "=", a ** b)
 
 # Попробуйте изменить значения a и b`,
                   task: "Измените значения переменных a и b, запустите код и посмотрите на результат"
@@ -125,59 +147,55 @@ print(f"Возведение в степень: {a} ** {b} = {a ** b}")
                 {
                   title: "Вещественные числа (float)",
                   type: "theory",
-                  content: `
-# Вещественные числа (float)
+                  content: `# Вещественные числа (float)
 
-Тип **float** используется для представления вещественных чисел (с плавающей точкой).
+Тип float используется для представления вещественных чисел (с плавающей точкой).
 
 ## Способы записи:
 - Обычная запись: 3.14, -2.5, 0.0
 - Экспоненциальная: 1.5e2 (равно 150.0), 3e-4 (равно 0.0003)
 
 ## Особенности:
-- **Конечная точность** - могут возникать ошибки округления
-- **Специальные значения**: float('inf'), float('-inf'), float('nan')
+- Конечная точность - могут возникать ошибки округления
+- Специальные значения: float('inf'), float('-inf'), float('nan')
 
 ## Полезные функции:
 - round(число, количество_знаков) - округление
 - abs(число) - модуль числа
-- int(число) - преобразование к целому (отбрасывает дробную часть)
-                  `
+- int(число) - преобразование к целому (отбрасывает дробную часть)`
                 },
                 {
                   title: "Работа с float",
                   type: "interactive",
                   content: "Изучим особенности работы с вещественными числами:",
-                  code: `import math
-
-# Различные способы записи float
+                  code: `# Различные способы записи float
 pi = 3.14159
 scientific = 1.5e3  # 1500.0
 small = 2e-3       # 0.002
 
-print(f"π ≈ {pi}")
-print(f"Научная нотация: 1.5e3 = {scientific}")
-print(f"Малое число: 2e-3 = {small}")
+print("π ≈", pi)
+print("Научная нотация: 1.5e3 =", scientific)
+print("Малое число: 2e-3 =", small)
 
 # Операции с float
 radius = 5.0
 area = pi * radius ** 2
-print(f"Площадь круга с радиусом {radius}: {area}")
+print("Площадь круга с радиусом", radius, ":", area)
 
 # Округление
-print(f"Округление π до 2 знаков: {round(pi, 2)}")
-print(f"Округление π до целого: {round(pi)}")
+print("Округление π до 2 знаков:", round(pi, 2))
+print("Округление π до целого:", round(pi))
 
-# Функции модуля math
-print(f"Точное значение π: {math.pi}")
-print(f"Квадратный корень из 16: {math.sqrt(16)}")`,
+# Математические функции
+import math
+print("Точное значение π:", math.pi)
+print("Квадратный корень из 16:", math.sqrt(16))`,
                   task: "Вычислите площадь круга с радиусом 7.5 и округлите до 2 знаков после запятой"
                 },
                 {
                   title: "Строки (string)",
                   type: "theory",
-                  content: `
-# Строки (string)
+                  content: `# Строки (string)
 
 Строки в Python - это последовательности символов, заключенные в кавычки.
 
@@ -187,19 +205,18 @@ print(f"Квадратный корень из 16: {math.sqrt(16)}")`,
 - Тройные кавычки: '''Многострочный текст'''
 
 ## Основные операции:
-- **Конкатенация**: "Hello" + " " + "World"
-- **Повторение**: "Python! " * 3
-- **Длина**: len("Привет") возвращает 6
-- **Индексирование**: "Python"[0] возвращает 'P'
-- **Срезы**: "Python"[1:4] возвращает 'yth'
+- Конкатенация: "Hello" + " " + "World"
+- Повторение: "Python! " * 3
+- Длина: len("Привет") возвращает 6
+- Индексирование: "Python"[0] возвращает 'P'
+- Срезы: "Python"[1:4] возвращает 'yth'
 
 ## Полезные методы:
 - .upper(), .lower() - изменение регистра
 - .strip() - удаление пробелов по краям
 - .replace(старое, новое) - замена подстроки
 - .split() - разбиение на список
-- .find() - поиск подстроки
-                  `
+- .find() - поиск подстроки`
                 },
                 {
                   title: "Работа со строками",
@@ -212,95 +229,29 @@ multiline = """Это
 многострочная
 строка"""
 
-print(f"Имя: {name}")
-print(f"Приветствие: {greeting}")
+print("Имя:", name)
+print("Приветствие:", greeting)
 print("Многострочная строка:")
 print(multiline)
 
 # Операции со строками
 full_greeting = greeting + ", " + name + "!"
-print(f"Полное приветствие: {full_greeting}")
+print("Полное приветствие:", full_greeting)
 
 # Повторение
 excited = "Python! " * 3
-print(f"Восклицание: {excited}")
+print("Восклицание:", excited)
 
 # Длина и индексы
-print(f"Длина строки '{name}': {len(name)}")
-print(f"Первый символ: {name[0]}")
-print(f"Последний символ: {name[-1]}")
-print(f"Срез [1:4]: {name[1:4]}")
+print("Длина строки '" + name + "':", len(name))
+print("Первый символ:", name[0])
+print("Последний символ:", name[-1])
+print("Срез [1:4]:", name[1:4])
 
 # Методы строк
-print(f"Верхний регистр: {name.upper()}")
-print(f"Нижний регистр: {name.lower()}")`,
+print("Верхний регистр:", name.upper())
+print("Нижний регистр:", name.lower())`,
                   task: "Создайте строку с вашим именем и выведите её длину и первый символ"
-                },
-                {
-                  title: "Форматирование строк",
-                  type: "theory",
-                  content: `
-# Форматирование строк
-
-Python предоставляет несколько способов форматирования строк.
-
-## 1. f-строки (рекомендуемый способ)
-Самый современный и удобный способ:
-\`\`\`python
-name = "Анна"
-age = 25
-print(f"Меня зовут {name}, мне {age} лет")
-\`\`\`
-
-## 2. Метод .format()
-\`\`\`python
-print("Меня зовут {}, мне {} лет".format(name, age))
-print("Меня зовут {name}, мне {age} лет".format(name=name, age=age))
-\`\`\`
-
-## 3. Старый стиль (%)
-\`\`\`python
-print("Меня зовут %s, мне %d лет" % (name, age))
-\`\`\`
-
-## Форматирование чисел в f-строках:
-- {число:.2f} - 2 знака после запятой
-- {число:,} - разделители тысяч
-- {число:.2%} - в процентах
-                  `
-                },
-                {
-                  title: "Практика форматирования",
-                  type: "interactive",
-                  content: "Попробуем различные способы форматирования:",
-                  code: `# Данные для форматирования
-name = "Алексей"
-age = 30
-salary = 75000.50
-percentage = 0.85
-
-# f-строки (современный способ)
-print("=== F-строки ===")
-print(f"Сотрудник: {name}")
-print(f"Возраст: {age} лет")
-print(f"Зарплата: {salary:.2f} руб.")
-print(f"Эффективность: {percentage:.1%}")
-
-# Метод format()
-print("\\n=== Метод .format() ===")
-print("Сотрудник: {}".format(name))
-print("Зарплата: {:.2f} руб.".format(salary))
-
-# Различные форматы чисел
-pi = 3.14159265359
-print(f"\\n=== Форматирование чисел ===")
-print(f"π = {pi}")
-print(f"π с 2 знаками: {pi:.2f}")
-print(f"π с 4 знаками: {pi:.4f}")
-
-big_number = 1234567
-print(f"Большое число: {big_number:,}")`,
-                  task: "Создайте f-строку, которая выводит информацию о товаре: название, цена с 2 знаками после запятой"
                 },
                 {
                   title: "Проверка знаний",
@@ -335,29 +286,35 @@ print(f"Большое число: {big_number:,}")`,
             { id: 7, title: "ООП", unlocked: false, completed: false }
           ];
 
-          // Выполнение кода
+          // Простая симуляция выполнения Python кода
           const executeCode = (code) => {
             try {
-              // Простая симуляция выполнения Python кода
               const output = [];
               const lines = code.split('\n');
               
+              // Простая обработка print()
               for (let line of lines) {
-                if (line.trim().startsWith('print(')) {
-                  const match = line.match(/print\((.*)\)/);
-                  if (match) {
-                    let content = match[1];
-                    // Простая обработка f-строк
-                    if (content.includes('f"') || content.includes("f'")) {
-                      content = content.replace(/f["'](.*)["']/, (match, p1) => {
-                        return `"${p1.replace(/{([^}]+)}/g, '${$1}')}"`;
-                      });
-                    }
+                line = line.trim();
+                if (line.startsWith('print(')) {
+                  // Упрощенная обработка print
+                  let content = line.slice(6, -1); // убираем print( и )
+                  
+                  // Обработка простых случаев
+                  if (content.includes('"')) {
+                    // Строки в кавычках
+                    content = content.replace(/"/g, '');
+                    output.push(content);
+                  } else if (content.includes("'")) {
+                    // Строки в одинарных кавычках
+                    content = content.replace(/'/g, '');
+                    output.push(content);
+                  } else {
+                    // Попытка вычислить выражение
                     try {
                       const result = eval(content);
                       output.push(String(result));
                     } catch (e) {
-                      output.push(content.replace(/['"]/g, ''));
+                      output.push(content);
                     }
                   }
                 }
@@ -369,284 +326,323 @@ print(f"Большое число: {big_number:,}")`,
             }
           };
 
-          // Компонент урока
-          const LessonStep = ({ step, index }) => {
-            const isCompleted = completedSteps.has(index);
-            
-            if (step.type === 'theory') {
-              return React.createElement('div', { className: "bg-white rounded-lg p-6 shadow-lg" },
-                React.createElement('div', { className: "flex items-center gap-3 mb-4" },
-                  React.createElement(BookOpen, { className: "w-6 h-6 text-blue-600" }),
-                  React.createElement('h3', { className: "text-xl font-bold text-gray-800" }, step.title)
-                ),
-                React.createElement('div', { className: "prose max-w-none" },
-                  React.createElement('pre', { 
-                    className: "whitespace-pre-wrap text-gray-700 font-sans leading-relaxed" 
-                  }, step.content)
-                ),
-                React.createElement('button', {
-                  onClick: () => {
-                    setCompletedSteps(prev => new Set([...prev, index]));
-                    if (index < lessons[currentLesson - 1].steps.length - 1) {
-                      setCurrentStep(index + 1);
-                    }
-                  },
-                  className: "mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                }, "Понятно, продолжить")
-              );
-            }
+          // Компонент теоретического урока
+          const TheoryStep = ({ step, index }) => (
+            <div className="bg-white rounded-lg p-6 shadow-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <BookIcon />
+                <h3 className="text-xl font-bold text-gray-800">{step.title}</h3>
+              </div>
+              <div className="prose max-w-none">
+                <pre className="whitespace-pre-wrap text-gray-700 font-sans leading-relaxed">
+                  {step.content}
+                </pre>
+              </div>
+              <button 
+                onClick={() => {
+                  setCompletedSteps(prev => new Set([...prev, index]));
+                  if (index < lessons[currentLesson - 1].steps.length - 1) {
+                    setCurrentStep(index + 1);
+                  }
+                }}
+                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Понятно, продолжить
+              </button>
+            </div>
+          );
 
-            if (step.type === 'interactive') {
-              return React.createElement('div', { className: "bg-white rounded-lg p-6 shadow-lg" },
-                React.createElement('div', { className: "flex items-center gap-3 mb-4" },
-                  React.createElement(Code, { className: "w-6 h-6 text-green-600" }),
-                  React.createElement('h3', { className: "text-xl font-bold text-gray-800" }, step.title)
-                ),
+          // Компонент интерактивного урока
+          const InteractiveStep = ({ step, index }) => (
+            <div className="bg-white rounded-lg p-6 shadow-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <CodeIcon />
+                <h3 className="text-xl font-bold text-gray-800">{step.title}</h3>
+              </div>
+              
+              {step.content && (
+                <p className="text-gray-700 mb-4">{step.content}</p>
+              )}
+              
+              {step.task && (
+                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                  <div className="flex items-center gap-2">
+                    <TargetIcon />
+                    <span className="font-semibold text-yellow-800">Задание:</span>
+                  </div>
+                  <p className="text-yellow-700 mt-1">{step.task}</p>
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Код:
+                  </label>
+                  <textarea
+                    value={userCode || step.code}
+                    onChange={(e) => setUserCode(e.target.value)}
+                    className="w-full h-64 p-3 border border-gray-300 rounded-lg font-mono text-sm resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Введите код здесь..."
+                  />
+                  <button
+                    onClick={() => executeCode(userCode || step.code)}
+                    className="mt-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+                  >
+                    <PlayIcon />
+                    Запустить код
+                  </button>
+                </div>
                 
-                step.content && React.createElement('p', { className: "text-gray-700 mb-4" }, step.content),
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Результат:
+                  </label>
+                  <div className="w-full h-64 p-3 bg-gray-900 text-green-400 rounded-lg font-mono text-sm overflow-auto">
+                    {codeOutput || 'Нажмите "Запустить код" для выполнения'}
+                  </div>
+                </div>
+              </div>
+
+              <button 
+                onClick={() => {
+                  setCompletedSteps(prev => new Set([...prev, index]));
+                  if (index < lessons[currentLesson - 1].steps.length - 1) {
+                    setCurrentStep(index + 1);
+                    setUserCode('');
+                    setCodeOutput('');
+                  }
+                }}
+                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Продолжить
+              </button>
+            </div>
+          );
+
+          // Компонент квиза
+          const QuizStep = ({ step, index }) => {
+            const [selectedAnswers, setSelectedAnswers] = useState({});
+            const [showResults, setShowResults] = useState(false);
+
+            return (
+              <div className="bg-white rounded-lg p-6 shadow-lg">
+                <div className="flex items-center gap-3 mb-4">
+                  <TargetIcon />
+                  <h3 className="text-xl font-bold text-gray-800">{step.title}</h3>
+                </div>
                 
-                step.task && React.createElement('div', { className: "bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4" },
-                  React.createElement('div', { className: "flex items-center gap-2" },
-                    React.createElement(Target, { className: "w-5 h-5 text-yellow-600" }),
-                    React.createElement('span', { className: "font-semibold text-yellow-800" }, "Задание:")
-                  ),
-                  React.createElement('p', { className: "text-yellow-700 mt-1" }, step.task)
-                ),
+                <p className="text-gray-700 mb-6">{step.content}</p>
 
-                React.createElement('div', { className: "grid grid-cols-1 lg:grid-cols-2 gap-4" },
-                  React.createElement('div', {},
-                    React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-2" }, "Код:"),
-                    React.createElement('textarea', {
-                      value: userCode || step.code,
-                      onChange: (e) => setUserCode(e.target.value),
-                      className: "w-full h-64 p-3 border border-gray-300 rounded-lg font-mono text-sm resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-                      placeholder: "Введите код здесь..."
-                    }),
-                    React.createElement('button', {
-                      onClick: () => executeCode(userCode || step.code),
-                      className: "mt-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
-                    },
-                      React.createElement(Play, { className: "w-4 h-4" }),
-                      "Запустить код"
-                    )
-                  ),
-                  
-                  React.createElement('div', {},
-                    React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-2" }, "Результат:"),
-                    React.createElement('div', { 
-                      className: "w-full h-64 p-3 bg-gray-900 text-green-400 rounded-lg font-mono text-sm overflow-auto" 
-                    }, codeOutput || 'Нажмите "Запустить код" для выполнения')
-                  )
-                ),
-
-                React.createElement('button', {
-                  onClick: () => {
-                    setCompletedSteps(prev => new Set([...prev, index]));
-                    if (index < lessons[currentLesson - 1].steps.length - 1) {
-                      setCurrentStep(index + 1);
-                      setUserCode('');
-                      setCodeOutput('');
-                    }
-                  },
-                  className: "mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                }, "Продолжить")
-              );
-            }
-
-            if (step.type === 'quiz') {
-              const [selectedAnswers, setSelectedAnswers] = useState({});
-              const [showResults, setShowResults] = useState(false);
-
-              return React.createElement('div', { className: "bg-white rounded-lg p-6 shadow-lg" },
-                React.createElement('div', { className: "flex items-center gap-3 mb-4" },
-                  React.createElement(Target, { className: "w-6 h-6 text-purple-600" }),
-                  React.createElement('h3', { className: "text-xl font-bold text-gray-800" }, step.title)
-                ),
-                
-                React.createElement('p', { className: "text-gray-700 mb-6" }, step.content),
-
-                React.createElement('div', { className: "space-y-6" },
-                  step.questions.map((q, qIndex) =>
-                    React.createElement('div', { key: qIndex, className: "border border-gray-200 rounded-lg p-4" },
-                      React.createElement('h4', { className: "font-semibold text-gray-800 mb-3" },
-                        `${qIndex + 1}. ${q.question}`
-                      ),
-                      React.createElement('div', { className: "space-y-2" },
-                        q.options.map((option, oIndex) =>
-                          React.createElement('label', { 
-                            key: oIndex, 
-                            className: "flex items-center space-x-3 cursor-pointer" 
-                          },
-                            React.createElement('input', {
-                              type: "radio",
-                              name: `question-${qIndex}`,
-                              value: oIndex,
-                              onChange: (e) => setSelectedAnswers({
+                <div className="space-y-6">
+                  {step.questions.map((q, qIndex) => (
+                    <div key={qIndex} className="border border-gray-200 rounded-lg p-4">
+                      <h4 className="font-semibold text-gray-800 mb-3">
+                        {qIndex + 1}. {q.question}
+                      </h4>
+                      <div className="space-y-2">
+                        {q.options.map((option, oIndex) => (
+                          <label key={oIndex} className="flex items-center space-x-3 cursor-pointer">
+                            <input
+                              type="radio"
+                              name={`question-${qIndex}`}
+                              value={oIndex}
+                              onChange={(e) => setSelectedAnswers({
                                 ...selectedAnswers,
                                 [qIndex]: parseInt(e.target.value)
-                              }),
-                              className: "w-4 h-4 text-blue-600"
-                            }),
-                            React.createElement('span', {
-                              className: `${
-                                showResults 
-                                  ? oIndex === q.correct 
-                                    ? 'text-green-600 font-semibold' 
-                                    : selectedAnswers[qIndex] === oIndex && oIndex !== q.correct
-                                      ? 'text-red-600'
-                                      : 'text-gray-600'
-                                  : 'text-gray-700'
-                              }`
-                            }, option)
-                          )
-                        )
-                      )
-                    )
-                  )
-                ),
+                              })}
+                              className="w-4 h-4 text-blue-600"
+                            />
+                            <span className={`${
+                              showResults 
+                                ? oIndex === q.correct 
+                                  ? 'text-green-600 font-semibold' 
+                                  : selectedAnswers[qIndex] === oIndex && oIndex !== q.correct
+                                    ? 'text-red-600'
+                                    : 'text-gray-600'
+                                : 'text-gray-700'
+                            }`}>
+                              {option}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
-                React.createElement('div', { className: "mt-6 flex gap-3" },
-                  !showResults ? 
-                    React.createElement('button', {
-                      onClick: () => setShowResults(true),
-                      className: "bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors",
-                      disabled: Object.keys(selectedAnswers).length < step.questions.length
-                    }, "Проверить ответы") :
-                    React.createElement('button', {
-                      onClick: () => {
+                <div className="mt-6 flex gap-3">
+                  {!showResults ? (
+                    <button
+                      onClick={() => setShowResults(true)}
+                      className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+                      disabled={Object.keys(selectedAnswers).length < step.questions.length}
+                    >
+                      Проверить ответы
+                    </button>
+                  ) : (
+                    <button 
+                      onClick={() => {
                         setCompletedSteps(prev => new Set([...prev, index]));
-                      },
-                      className: "bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
-                    }, "Завершить урок")
-                ),
+                      }}
+                      className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                    >
+                      Завершить урок
+                    </button>
+                  )}
+                </div>
 
-                showResults && React.createElement('div', { className: "mt-4 p-4 bg-blue-50 rounded-lg" },
-                  React.createElement('p', { className: "text-blue-800" },
-                    `Правильных ответов: ${Object.entries(selectedAnswers).filter(([qIndex, answer]) => 
-                      answer === step.questions[parseInt(qIndex)].correct
-                    ).length} из ${step.questions.length}`
-                  )
-                )
-              );
-            }
-
-            return null;
+                {showResults && (
+                  <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                    <p className="text-blue-800">
+                      Правильных ответов: {Object.entries(selectedAnswers).filter(([qIndex, answer]) => 
+                        answer === step.questions[parseInt(qIndex)].correct
+                      ).length} из {step.questions.length}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
           };
 
           const currentLessonData = lessons.find(l => l.id === currentLesson);
           const currentStepData = currentLessonData?.steps[currentStep];
 
-          return React.createElement('div', { className: "min-h-screen bg-gray-50 flex" },
-            // Боковая панель
-            React.createElement('div', { className: "w-80 bg-white shadow-lg" },
-              React.createElement('div', { className: "p-6 border-b" },
-                React.createElement('h1', { className: "text-2xl font-bold text-gray-800" }, "Курс Python"),
-                React.createElement('p', { className: "text-gray-600 mt-1" }, "7 дней до мастерства")
-              ),
-              
-              React.createElement('div', { className: "p-4" },
-                React.createElement('div', { className: "space-y-2" },
-                  lessons.map((lesson) =>
-                    React.createElement('div', {
-                      key: lesson.id,
-                      className: `p-3 rounded-lg cursor-pointer transition-colors ${
-                        lesson.id === currentLesson
-                          ? 'bg-blue-100 border-l-4 border-blue-600'
-                          : lesson.unlocked
-                          ? 'hover:bg-gray-100'
-                          : 'opacity-50 cursor-not-allowed'
-                      }`,
-                      onClick: () => lesson.unlocked && setCurrentLesson(lesson.id)
-                    },
-                      React.createElement('div', { className: "flex items-center gap-3" },
-                        lesson.completed ? 
-                          React.createElement(Check, { className: "w-5 h-5 text-green-600" }) :
-                          lesson.unlocked ? 
-                            React.createElement('div', { className: "w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center" },
-                              React.createElement('span', { className: "text-white text-xs font-bold" }, lesson.id)
-                            ) :
-                            React.createElement(Lock, { className: "w-5 h-5 text-gray-400" }),
-                        React.createElement('span', {
-                          className: `font-medium ${lesson.unlocked ? 'text-gray-800' : 'text-gray-400'}`
-                        }, lesson.title)
-                      )
-                    )
-                  )
-                )
-              ),
+          // Выбор компонента в зависимости от типа шага
+          const renderStep = () => {
+            if (!currentStepData) return null;
+            
+            switch (currentStepData.type) {
+              case 'theory':
+                return <TheoryStep step={currentStepData} index={currentStep} />;
+              case 'interactive':
+                return <InteractiveStep step={currentStepData} index={currentStep} />;
+              case 'quiz':
+                return <QuizStep step={currentStepData} index={currentStep} />;
+              default:
+                return null;
+            }
+          };
 
-              // Прогресс
-              React.createElement('div', { className: "p-4 border-t mt-auto" },
-                React.createElement('div', { className: "text-sm text-gray-600 mb-2" },
-                  `Прогресс урока: ${completedSteps.size} / ${currentLessonData?.steps.length || 0}`
-                ),
-                React.createElement('div', { className: "w-full bg-gray-200 rounded-full h-2" },
-                  React.createElement('div', {
-                    className: "bg-blue-600 h-2 rounded-full transition-all duration-300",
-                    style: {
-                      width: `${((completedSteps.size) / (currentLessonData?.steps.length || 1)) * 100}%`
-                    }
-                  })
-                )
-              )
-            ),
+          return (
+            <div className="min-h-screen bg-gray-50 flex">
+              {/* Боковая панель */}
+              <div className="w-80 bg-white shadow-lg">
+                <div className="p-6 border-b">
+                  <h1 className="text-2xl font-bold text-gray-800">Курс Python</h1>
+                  <p className="text-gray-600 mt-1">7 дней до мастерства</p>
+                </div>
+                
+                <div className="p-4">
+                  <div className="space-y-2">
+                    {lessons.map((lesson) => (
+                      <div
+                        key={lesson.id}
+                        className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                          lesson.id === currentLesson
+                            ? 'bg-blue-100 border-l-4 border-blue-600'
+                            : lesson.unlocked
+                            ? 'hover:bg-gray-100'
+                            : 'opacity-50 cursor-not-allowed'
+                        }`}
+                        onClick={() => lesson.unlocked && setCurrentLesson(lesson.id)}
+                      >
+                        <div className="flex items-center gap-3">
+                          {lesson.completed ? (
+                            <CheckIcon />
+                          ) : lesson.unlocked ? (
+                            <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center">
+                              <span className="text-white text-xs font-bold">{lesson.id}</span>
+                            </div>
+                          ) : (
+                            <LockIcon />
+                          )}
+                          <span className={`font-medium ${
+                            lesson.unlocked ? 'text-gray-800' : 'text-gray-400'
+                          }`}>
+                            {lesson.title}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-            // Основной контент
-            React.createElement('div', { className: "flex-1 p-8" },
-              React.createElement('div', { className: "max-w-4xl mx-auto" },
-                // Навигация по шагам
-                React.createElement('div', { className: "mb-6" },
-                  React.createElement('div', { className: "flex items-center space-x-2 text-sm text-gray-600 mb-2" },
-                    React.createElement('span', {}, `Урок ${currentLesson}`),
-                    React.createElement('span', {}, "•"),
-                    React.createElement('span', {}, `Шаг ${currentStep + 1} из ${currentLessonData?.steps.length}`)
-                  ),
-                  React.createElement('div', { className: "flex space-x-2" },
-                    currentLessonData?.steps.map((_, index) =>
-                      React.createElement('div', {
-                        key: index,
-                        className: `w-3 h-3 rounded-full ${
-                          index === currentStep
-                            ? 'bg-blue-600'
-                            : completedSteps.has(index)
-                            ? 'bg-green-600'
-                            : 'bg-gray-300'
-                        }`
-                      })
-                    )
-                  )
-                ),
+                {/* Прогресс */}
+                <div className="p-4 border-t mt-auto">
+                  <div className="text-sm text-gray-600 mb-2">
+                    Прогресс урока: {completedSteps.size} / {currentLessonData?.steps.length || 0}
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div 
+                      className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                      style={{
+                        width: `${((completedSteps.size) / (currentLessonData?.steps.length || 1)) * 100}%`
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
 
-                // Контент шага
-                currentStepData && React.createElement(LessonStep, { 
-                  step: currentStepData, 
-                  index: currentStep 
-                }),
+              {/* Основной контент */}
+              <div className="flex-1 p-8">
+                <div className="max-w-4xl mx-auto">
+                  {/* Навигация по шагам */}
+                  <div className="mb-6">
+                    <div className="flex items-center space-x-2 text-sm text-gray-600 mb-2">
+                      <span>Урок {currentLesson}</span>
+                      <span>•</span>
+                      <span>Шаг {currentStep + 1} из {currentLessonData?.steps.length}</span>
+                    </div>
+                    <div className="flex space-x-2">
+                      {currentLessonData?.steps.map((_, index) => (
+                        <div
+                          key={index}
+                          className={`w-3 h-3 rounded-full ${
+                            index === currentStep
+                              ? 'bg-blue-600'
+                              : completedSteps.has(index)
+                              ? 'bg-green-600'
+                              : 'bg-gray-300'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
 
-                // Навигация
-                React.createElement('div', { className: "flex justify-between mt-6" },
-                  React.createElement('button', {
-                    onClick: () => currentStep > 0 && setCurrentStep(currentStep - 1),
-                    disabled: currentStep === 0,
-                    className: "px-4 py-2 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
-                  }, "← Назад"),
-                  
-                  React.createElement('button', {
-                    onClick: () => {
-                      if (currentStep < currentLessonData.steps.length - 1) {
-                        setCurrentStep(currentStep + 1);
-                      }
-                    },
-                    disabled: currentStep >= currentLessonData.steps.length - 1,
-                    className: "px-4 py-2 text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:cursor-not-allowed"
-                  }, "Вперед →")
-                )
-              )
-            )
+                  {/* Контент шага */}
+                  {renderStep()}
+
+                  {/* Навигация */}
+                  <div className="flex justify-between mt-6">
+                    <button
+                      onClick={() => currentStep > 0 && setCurrentStep(currentStep - 1)}
+                      disabled={currentStep === 0}
+                      className="px-4 py-2 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      ← Назад
+                    </button>
+                    
+                    <button
+                      onClick={() => {
+                        if (currentStep < currentLessonData.steps.length - 1) {
+                          setCurrentStep(currentStep + 1);
+                        }
+                      }}
+                      disabled={currentStep >= currentLessonData.steps.length - 1}
+                      className="px-4 py-2 text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Вперед →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           );
         };
 
-        ReactDOM.render(React.createElement(PythonCourseApp), document.getElementById('root'));
+        // Рендер приложения
+        ReactDOM.render(<PythonCourseApp />, document.getElementById('root'));
     </script>
 </body>
 </html>
